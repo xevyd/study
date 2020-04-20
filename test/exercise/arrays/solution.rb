@@ -2,7 +2,8 @@ module Exercise
   module Arrays
     class << self
       def replace(array)
-        array.map { |i| i > 0 ? array.max : i }
+        max = array.reduce() { |max, el| max < el ? el : max }
+        array.map { |i| i > 0 ? max : i }
       end
 
       def search(_array, _query)
