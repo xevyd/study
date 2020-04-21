@@ -6,26 +6,32 @@ module Exercise
         array.map { |i| i > 0 ? max : i }
       end
 
-      def search(_array, _query)
-        if _array.length == 0 || _array[0] > _query || _array[_array.length - 1] < _query
+      def search(array, query)
+        firstIndex = 0
+        lastIndex = array.length - 1
+
+        if array.length == 0 || array[firstIndex] > query || array[lastIndex] < query
           return -1
         else
-          first = 0
-          last = _array.length - 1
-          
-          while first <= last
-            mid = (first + last) / 2
+          b_search(array, query, firstIndex, lastIndex)
+        end
+      end
 
-            if _array[mid] == _query
-              return mid
-            elsif _array[mid] > _query
-              last = mid - 1
-            elsif _array[mid] < _query
-              first = mid + 1
-            else
-            end
+      def b_search(array, query, firstIndex, lastIndex)
+        mid = (firstIndex + lastIndex) / 2
+        
+        if array[mid] == query
+          return mid
+        end
+        
+        if firstIndex < lastIndex
+          if array[mid] > query
+            b_search(array, query, firstIndex, mid - 1)
+          elsif array[mid] < query
+            b_search(array, query, mid + 1, lastIndex)
           end
-          return -1
+        else
+          -1
         end
       end
     end
